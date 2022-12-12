@@ -1,3 +1,4 @@
+import 'package:basic_cart_provider_navigator_flutter/screen/productFeature.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -107,3 +108,11 @@ class Operations with ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+/*ProductFeature(
+          'Haworthia Cooperi',
+          '\$6.99',
+          "https://cdn.shopify.com/s/files/1/0088/9513/5801/products/EcheveriaSalsaVerde_1000x.png?v=1634060356",
+          1),
+          */

@@ -2,7 +2,7 @@ import 'package:basic_cart_provider_navigator_flutter/screen/cartList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:basic_cart_provider_navigator_flutter/screen/productFeature.dart';
 import '../main.dart';
 
 class ItemList extends StatefulWidget {
@@ -28,10 +28,19 @@ class _ItemListState extends State<ItemList> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 10),
+            padding: EdgeInsets.only(top: 20, bottom: 10, left: 10),
             child: Text(
-              'Item List',
+              'All Products',
               style: TextStyle(fontSize: 32),
+            ),
+          ),
+
+          Padding(
+            padding: EdgeInsets.only(top: 8, bottom: 10, left: 10, right: 10),
+            child: Text(
+              'All of our premium cactus and succulents plants for sale.',
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
             ),
           ),
 
@@ -122,60 +131,68 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 800,
-      width: 100,
-      color: fontColor,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          Image.network(
-            plantImg!,
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            bottom: 30,
-            child: Container(
-              color: Colors.white70,
-              height: 42,
-              width: 170,
-            ),
-          ),
-          Positioned(
-            bottom: 53,
-            child: Text(
-              plantName!,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 11.0,
-                color: Colors.black,
+    return InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductFeature(
+                      plantName!, plantPrice!, plantImg!, index)));
+        },
+        child: Container(
+          height: 800,
+          width: 100,
+          color: fontColor,
+          child: Stack(
+            alignment: Alignment.topCenter,
+            children: [
+              Image.network(
+                plantImg!,
+                fit: BoxFit.cover,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ), //Plant Name
-
-          Positioned(
-            bottom: 32,
-            child: Text(
-              plantPrice!,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12.0,
-                color: baseColor,
+              Positioned(
+                bottom: 30,
+                child: Container(
+                  color: Colors.white70,
+                  height: 42,
+                  width: 170,
+                ),
               ),
-              textAlign: TextAlign.center,
-            ),
-          ), //Plant Price
+              Positioned(
+                bottom: 53,
+                child: Text(
+                  plantName!,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11.0,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ), //Plant Name
 
-          Positioned(
-            bottom: 0,
-            child: CartButton(index),
-            height: 30,
-            width: 200,
+              Positioned(
+                bottom: 32,
+                child: Text(
+                  plantPrice!,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                    color: baseColor,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ), //Plant Price
+
+              Positioned(
+                bottom: 0,
+                child: CartButton(index),
+                height: 30,
+                width: 200,
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 

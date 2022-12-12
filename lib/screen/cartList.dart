@@ -16,7 +16,7 @@ class _CartListState extends State<CartList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Replant Bangladesh',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -32,10 +32,6 @@ class _CartListState extends State<CartList> {
               style: TextStyle(fontSize: 35),
             ),
           ),
-
-          //
-          //
-
           Expanded(
             child: Consumer<Operations>(
               builder: ((context, value, child) => ListView.builder(
