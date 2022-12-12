@@ -118,14 +118,14 @@ class ProductFeature extends StatelessWidget {
                 label: Text('Add to cart'),
                 icon: Icon(
                   Icons.add_shopping_cart_rounded,
-                  size: 14,
+                  size: 17,
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: baseColor,
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                      const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
                   textStyle: GoogleFonts.josefinSans(
-                    textStyle: TextStyle(fontSize: 15),
+                    textStyle: TextStyle(fontSize: 17),
                   ),
                 ),
               ),
