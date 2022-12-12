@@ -1,3 +1,4 @@
+import 'package:basic_cart_provider_navigator_flutter/screen/itemList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../main.dart';
@@ -75,7 +76,8 @@ class _CartListState extends State<CartList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const ItemList()));
         },
         backgroundColor: baseColor,
         child: Icon(Icons.home_filled),

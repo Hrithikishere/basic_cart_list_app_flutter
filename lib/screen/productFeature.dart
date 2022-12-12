@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:basic_cart_provider_navigator_flutter/screen/cartList.dart';
 import '../main.dart';
 
 class ProductFeature extends StatelessWidget {
@@ -29,6 +30,15 @@ class ProductFeature extends StatelessWidget {
         ),
         centerTitle: true,
         backgroundColor: baseColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartList()));
+            },
+            icon: Icon(Icons.shopping_cart_checkout_rounded),
+          )
+        ],
       ),
       body: CustomScrollView(slivers: [
         SliverFillRemaining(
