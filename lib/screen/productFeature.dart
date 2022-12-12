@@ -30,62 +30,80 @@ class ProductFeature extends StatelessWidget {
         centerTitle: true,
         backgroundColor: baseColor,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(13),
-            child: Image.network(
-              "$plantImg",
-              fit: BoxFit.contain,
-              alignment: Alignment.center,
-            ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(left: 40),
-            child: Text(
-              "$plantName",
-              style: GoogleFonts.cabin(
-                textStyle: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, left: 152),
-            child: Text(
-              "$plantPrice",
-              style: GoogleFonts.cabin(
-                textStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: baseColor),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20, left: 20),
-            child: Text(
-              "Product Details:",
-              style: GoogleFonts.cabin(
-                textStyle: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+      body: CustomScrollView(slivers: [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(13),
+                child: Image.network(
+                  "$plantImg",
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center,
                 ),
               ),
-            ),
+
+              Center(
+                child: Text(
+                  "$plantName",
+                  style: GoogleFonts.cabin(
+                    textStyle:
+                        TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8, left: 152),
+                child: Text(
+                  "$plantPrice",
+                  style: GoogleFonts.cabin(
+                    textStyle: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: baseColor),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20, left: 20),
+                child: Text(
+                  "Product Details:",
+                  style: GoogleFonts.cabin(
+                    textStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+                  child: Text(
+                    '${specs[index]}',
+                    style: GoogleFonts.cabin(textStyle: TextStyle()),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 25, left: 20, right: 20),
+                  child: Text(
+                    '${desc[index]}',
+                    style: GoogleFonts.cabin(textStyle: TextStyle()),
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
+              ),
+
+              //Spacer(),)
+            ],
           ),
-          Padding(
-            padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-            child: Text(
-              'Echeveria succulents are a genus of succulents in the Crassulaceae family. Echeveria succulents are native to many parts of Central America, specifically Mexico. ',
-              style: GoogleFonts.cabin(textStyle: TextStyle()),
-              textAlign: TextAlign.justify,
-            ),
-          ),
-          //Spacer(),
-        ],
-      ),
+        )
+      ]),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         elevation: 10,
