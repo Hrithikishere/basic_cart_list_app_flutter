@@ -94,6 +94,7 @@ List<String> specs = [
 
 List<String> cartList = [];
 List<String> cartListPrice = [];
+List<String> cartListImage = [];
 List<int> cartListQuantity = [];
 
 void main() {
@@ -124,6 +125,16 @@ class Operations with ChangeNotifier {
 
   void addItem(String item) {
     cartList.add(item);
+    notifyListeners();
+  }
+
+  void addItemPrice(String item) {
+    cartListPrice.add(item);
+    notifyListeners();
+  }
+
+  void addItemImage(String item) {
+    cartListImage.add(item);
     notifyListeners();
   }
 

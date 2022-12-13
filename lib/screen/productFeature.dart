@@ -64,8 +64,7 @@ class ProductFeature extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 8, left: 152),
+              Center(
                 child: Text(
                   "$plantPrice",
                   style: GoogleFonts.cabin(
@@ -94,7 +93,7 @@ class ProductFeature extends StatelessWidget {
                   child: Text(
                     '${specs[index]}',
                     style: GoogleFonts.cabin(textStyle: TextStyle()),
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.left,
                   ),
                 ),
               ),
@@ -142,9 +141,11 @@ class ProductFeature extends StatelessWidget {
 
                   var operations = context.read<Operations>();
                   operations.addItem(plantNames[index]);
+                  operations.addItemPrice(plantPrices[index]);
+                  operations.addItemImage(linkList[index]);
                 },
-                label: Text('Add to cart'),
-                icon: Icon(
+                label: const Text('Add to cart'),
+                icon: const Icon(
                   Icons.add_shopping_cart_rounded,
                   size: 17,
                 ),
@@ -153,7 +154,7 @@ class ProductFeature extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 45, vertical: 18),
                   textStyle: GoogleFonts.josefinSans(
-                    textStyle: TextStyle(fontSize: 17),
+                    textStyle: const TextStyle(fontSize: 17),
                   ),
                 ),
               ),

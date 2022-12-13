@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:basic_cart_provider_navigator_flutter/screen/itemList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,7 @@ class _CartListState extends State<CartList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Replant Bangladesh',
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
@@ -26,9 +28,9 @@ class _CartListState extends State<CartList> {
       ),
       body: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 20, bottom: 10),
-            child: const Text(
+            child: Text(
               'Cart List',
               style: TextStyle(fontSize: 35),
             ),
@@ -39,33 +41,75 @@ class _CartListState extends State<CartList> {
                     itemCount: cartList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
+                        leading: Image.network(cartListImage[index]),
                         title: Text(
                           cartList[index],
                           style: GoogleFonts.cabin(
-                            textStyle: TextStyle(fontSize: 20),
+                            textStyle: TextStyle(fontSize: 17),
                           ),
                         ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {
-                            final message = SnackBar(
-                              content: Text(
-                                "'${cartList[index]}' removed from Cart",
-                                style: TextStyle(color: fontColor),
+                        subtitle: Text("${cartListPrice[index]} / piece"),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.add_circle_outline,
+                                color: baseColor,
                               ),
-                              padding: const EdgeInsets.all(18.0),
-                              duration: const Duration(seconds: 1),
-                              backgroundColor: primaryColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              behavior: SnackBarBehavior.floating,
-                              elevation: 6.0,
-                            );
-                            ScaffoldMessenger.of(context).showSnackBar(message);
+                              onPressed: () {
+                                final message = SnackBar(
+                                  content: Text(
+                                    "'${cartList[index]}' removed from Cart",
+                                    style: TextStyle(color: fontColor),
+                                  ),
+                                  padding: const EdgeInsets.all(18.0),
+                                  duration: const Duration(seconds: 1),
+                                  backgroundColor: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  behavior: SnackBarBehavior.floating,
+                                  elevation: 6.0,
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(message);
 
-                            var operations = context.read<Operations>();
-                            operations.removeItem(cartList[index]);
-                          },
+                                var operations = context.read<Operations>();
+                                operations.removeItem(cartList[index]);
+                              },
+                            ),
+                            Text(
+                              '5',
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w500),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.remove_circle_outline,
+                                color: baseColor,
+                              ),
+                              onPressed: () {
+                                final message = SnackBar(
+                                  content: Text(
+                                    "'${cartList[index]}' removed from Cart",
+                                    style: TextStyle(color: fontColor),
+                                  ),
+                                  padding: const EdgeInsets.all(18.0),
+                                  duration: const Duration(seconds: 1),
+                                  backgroundColor: primaryColor,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5)),
+                                  behavior: SnackBarBehavior.floating,
+                                  elevation: 6.0,
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(message);
+
+                                var operations = context.read<Operations>();
+                                operations.removeItem(cartList[index]);
+                              },
+                            ),
+                          ],
                         ),
                       );
                     },

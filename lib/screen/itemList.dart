@@ -224,6 +224,8 @@ class CartButton extends StatelessWidget {
 
         var operations = context.read<Operations>();
         operations.addItem(plantNames[index]);
+        operations.addItemPrice(plantPrices[index]);
+        operations.addItemImage(linkList[index]);
       },
       child: Text('Add to Cart'),
       style: ElevatedButton.styleFrom(
