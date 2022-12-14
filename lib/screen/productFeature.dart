@@ -8,12 +8,12 @@ class ProductFeature extends StatelessWidget {
   //const ProductFeature({super.key});
 
   String? plantName;
-  String? plantPrice;
+  double plantPrice = 0.0;
   String? plantImg;
   var index;
 
   ProductFeature(
-      String plantName, String plantPrice, String plantImg, var index) {
+      String plantName, double plantPrice, String plantImg, var index) {
     this.plantName = plantName;
     this.plantPrice = plantPrice;
     this.plantImg = plantImg;
@@ -140,9 +140,14 @@ class ProductFeature extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(message);
 
                   var operations = context.read<Operations>();
-                  operations.addItem(plantNames[index]);
-                  operations.addItemPrice(plantPrices[index]);
-                  operations.addItemImage(linkList[index]);
+                  if (cartList.contains(plantNames[index])) {
+                    operations.addItemQuantityOne(plantNames[index]);
+                  } else {
+                    operations.addItem(plantNames[index]);
+                    operations.addItemPrice(plantPrices[index]);
+                    operations.addItemImage(linkList[index]);
+                    operations.addItemQuantity(1);
+                  }
                 },
                 label: const Text('Add to cart'),
                 icon: const Icon(

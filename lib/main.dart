@@ -44,16 +44,16 @@ List<String> plantNames = [
   'Echeveria Purporeum',
 ];
 
-List<String> plantPrices = [
-  '\$8.99',
-  '\$6.99',
-  '\$6.99',
-  '\$6.99',
-  '\$6.99',
-  '\$7.99',
-  '\$6.99',
-  '\$6.99',
-  '\$5.99',
+List<double> plantPrices = [
+  8.99,
+  6.99,
+  6.99,
+  6.99,
+  6.99,
+  7.99,
+  6.99,
+  6.99,
+  5.99,
 ];
 
 List<String> linkList = [
@@ -93,7 +93,7 @@ List<String> specs = [
 ];
 
 List<String> cartList = [];
-List<String> cartListPrice = [];
+List<double> cartListPrice = [];
 List<String> cartListImage = [];
 List<int> cartListQuantity = [];
 
@@ -128,8 +128,25 @@ class Operations with ChangeNotifier {
     notifyListeners();
   }
 
-  void addItemPrice(String item) {
+  void addItemPrice(double item) {
     cartListPrice.add(item);
+    notifyListeners();
+  }
+
+  void addItemQuantity(int item) {
+    cartListQuantity.add(item);
+    notifyListeners();
+  }
+
+  void addItemQuantityOne(String item) {
+    int index = cartList.indexOf(item);
+    cartListQuantity[index] = cartListQuantity[index] + 1;
+    notifyListeners();
+  }
+
+  void removeItemQuantityOne(String item) {
+    int index = cartList.indexOf(item);
+    cartListQuantity[index] = cartListQuantity[index] - 1;
     notifyListeners();
   }
 

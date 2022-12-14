@@ -58,7 +58,7 @@ class _ItemListState extends State<ItemList> {
               itemCount: plantNames.length,
               itemBuilder: (BuildContext context, int index) {
                 String plantName;
-                String plantPrice;
+                double plantPrice;
                 String plantImg;
                 plantName = plantNames[index];
                 plantPrice = plantPrices[index];
@@ -101,7 +101,7 @@ class ProductsList extends StatelessWidget {
         itemCount: plantNames.length,
         itemBuilder: (BuildContext context, int index) {
           String plantName;
-          String plantPrice;
+          double plantPrice;
           String plantImg;
           plantName = plantNames[index];
           plantPrice = plantPrices[index];
@@ -118,11 +118,11 @@ class Products extends StatelessWidget {
   //const Products({Key? key}) : super(key: key);
 
   String? plantName;
-  String? plantPrice;
+  double plantPrice = 0.0;
   String? plantImg;
   var index;
 
-  Products(String plantName, String plantPrice, String plantImg, var index) {
+  Products(String plantName, double plantPrice, String plantImg, var index) {
     this.plantName = plantName;
     this.plantPrice = plantPrice;
     this.plantImg = plantImg;
@@ -137,7 +137,7 @@ class Products extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => ProductFeature(
-                      plantName!, plantPrice!, plantImg!, index)));
+                      plantName!, plantPrice, plantImg!, index)));
         },
         child: Container(
           height: 800,
@@ -174,7 +174,7 @@ class Products extends StatelessWidget {
               Positioned(
                 bottom: 32,
                 child: Text(
-                  plantPrice!,
+                  '$plantPrice',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
@@ -223,9 +223,15 @@ class CartButton extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(message);
 
         var operations = context.read<Operations>();
-        operations.addItem(plantNames[index]);
-        operations.addItemPrice(plantPrices[index]);
-        operations.addItemImage(linkList[index]);
+
+        if (cartList.contains(plantNames[index])) {
+          operations.addItemQuantityOne(plantNames[index]);
+        } else {
+          operations.addItem(plantNames[index]);
+          operations.addItemPrice(plantPrices[index]);
+          operations.addItemImage(linkList[index]);
+          operations.addItemQuantity(1);
+        }
       },
       child: Text('Add to Cart'),
       style: ElevatedButton.styleFrom(

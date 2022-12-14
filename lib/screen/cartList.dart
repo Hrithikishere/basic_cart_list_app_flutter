@@ -75,11 +75,11 @@ class _CartListState extends State<CartList> {
                                     .showSnackBar(message);
 
                                 var operations = context.read<Operations>();
-                                operations.removeItem(cartList[index]);
+                                operations.addItemQuantityOne(cartList[index]);
                               },
                             ),
                             Text(
-                              '5',
+                              '${cartListQuantity[index]}',
                               style: TextStyle(
                                   fontSize: 17, fontWeight: FontWeight.w500),
                             ),
@@ -106,7 +106,11 @@ class _CartListState extends State<CartList> {
                                     .showSnackBar(message);
 
                                 var operations = context.read<Operations>();
-                                operations.removeItem(cartList[index]);
+                                operations
+                                    .removeItemQuantityOne(cartList[index]);
+                                if (cartListQuantity[index] == 0) {
+                                  operations.removeItem(cartList[index]);
+                                }
                               },
                             ),
                           ],
