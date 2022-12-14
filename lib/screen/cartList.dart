@@ -29,7 +29,7 @@ class _CartListState extends State<CartList> {
       body: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 20, bottom: 10),
+            padding: EdgeInsets.only(top: 20, bottom: 15),
             child: Text(
               'Cart List',
               style: TextStyle(fontSize: 35),
@@ -45,10 +45,16 @@ class _CartListState extends State<CartList> {
                         title: Text(
                           cartList[index],
                           style: GoogleFonts.cabin(
-                            textStyle: TextStyle(fontSize: 17),
+                            textStyle: TextStyle(fontSize: 15),
                           ),
                         ),
-                        subtitle: Text("${cartListPrice[index]} / piece"),
+                        subtitle: Padding(
+                          padding: EdgeInsets.only(top: 5),
+                          child: Text(
+                            "\$ ${cartListPrice[index] * cartListQuantity[index]}",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
                         trailing: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -56,24 +62,9 @@ class _CartListState extends State<CartList> {
                               icon: Icon(
                                 Icons.add_circle_outline,
                                 color: baseColor,
+                                size: 22,
                               ),
                               onPressed: () {
-                                final message = SnackBar(
-                                  content: Text(
-                                    "'${cartList[index]}' removed from Cart",
-                                    style: TextStyle(color: fontColor),
-                                  ),
-                                  padding: const EdgeInsets.all(18.0),
-                                  duration: const Duration(seconds: 1),
-                                  backgroundColor: primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(5)),
-                                  behavior: SnackBarBehavior.floating,
-                                  elevation: 6.0,
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(message);
-
                                 var operations = context.read<Operations>();
                                 operations.addItemQuantityOne(cartList[index]);
                               },
@@ -81,12 +72,13 @@ class _CartListState extends State<CartList> {
                             Text(
                               '${cartListQuantity[index]}',
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w500),
+                                  fontSize: 15, fontWeight: FontWeight.w500),
                             ),
                             IconButton(
                               icon: Icon(
                                 Icons.remove_circle_outline,
                                 color: baseColor,
+                                size: 22,
                               ),
                               onPressed: () {
                                 final message = SnackBar(
@@ -102,19 +94,20 @@ class _CartListState extends State<CartList> {
                                   behavior: SnackBarBehavior.floating,
                                   elevation: 6.0,
                                 );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(message);
 
                                 var operations = context.read<Operations>();
                                 operations
                                     .removeItemQuantityOne(cartList[index]);
                                 if (cartListQuantity[index] == 0) {
                                   operations.removeItem(cartList[index]);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(message);
                                 }
                               },
                             ),
                           ],
                         ),
+                        isThreeLine: true,
                       );
                     },
                   )),

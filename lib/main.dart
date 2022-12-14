@@ -156,8 +156,12 @@ class Operations with ChangeNotifier {
   }
 
   void removeItem(String item) {
-    cartList.remove(item);
+    cartListImage.remove(item);
+    int index = cartList.indexOf(item);
+    cartListQuantity.remove(cartListQuantity[index]);
     notifyListeners();
+    cartListPrice.remove(item);
+    cartList.remove(item);
   }
 }
 
