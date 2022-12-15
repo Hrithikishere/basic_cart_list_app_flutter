@@ -16,6 +16,11 @@ class CartList extends StatefulWidget {
 
 class _CartListState extends State<CartList> {
   @override
+  initState() {
+    var operations = context.read<Operations>();
+    operations.totalPrice();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -67,6 +72,7 @@ class _CartListState extends State<CartList> {
                               onPressed: () {
                                 var operations = context.read<Operations>();
                                 operations.addItemQuantityOne(cartList[index]);
+                                operations.totalPrice();
                               },
                             ),
                             Text(
@@ -98,8 +104,10 @@ class _CartListState extends State<CartList> {
                                 var operations = context.read<Operations>();
                                 operations
                                     .removeItemQuantityOne(cartList[index]);
+                                operations.totalPrice();
                                 if (cartListQuantity[index] == 0) {
                                   operations.removeItem(cartList[index]);
+                                  operations.totalPrice();
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(message);
                                 }
@@ -113,6 +121,42 @@ class _CartListState extends State<CartList> {
                   )),
             ),
           ),
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: baseColor,
+            ),
+            height: 86,
+            width: 400,
+            child: Stack(
+              children: [
+                const Positioned(
+                  left: 10,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 15),
+                    child: Text(
+                      'Total',
+                      style: TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 12,
+                  bottom: 1,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 2, bottom: 5),
+                    child: Consumer<Operations>(
+                      builder: ((context, value, child) => Text(
+                            '\$${double.parse((TotalPrice).toStringAsFixed(2))}',
+                            style: const TextStyle(
+                                fontSize: 35, color: Colors.white),
+                          )),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -120,8 +164,11 @@ class _CartListState extends State<CartList> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const ItemList()));
         },
-        backgroundColor: baseColor,
-        child: Icon(Icons.home_filled),
+        backgroundColor: Colors.white,
+        child: Icon(
+          Icons.home_filled,
+          color: baseColor,
+        ),
       ),
     );
   }

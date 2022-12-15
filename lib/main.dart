@@ -97,6 +97,7 @@ List<String> cartList = [];
 List<double> cartListPrice = [];
 List<String> cartListImage = [];
 List<int> cartListQuantity = [];
+double TotalPrice = 0.0;
 
 void main() {
   runApp(
@@ -156,11 +157,20 @@ class Operations with ChangeNotifier {
     notifyListeners();
   }
 
+  void totalPrice() {
+    double tP = 0.0;
+    for (int i = 0; i < cartListPrice.length; i++) {
+      tP = tP + (cartListPrice[i] * cartListQuantity[i]);
+    }
+    TotalPrice = tP;
+    notifyListeners();
+  }
+
   void removeItem(String item) {
-    cartListImage.remove(item);
     int index = cartList.indexOf(item);
+    cartListImage.remove(cartListImage[index]);
     cartListQuantity.remove(cartListQuantity[index]);
-    cartListPrice.remove(item);
+    cartListPrice.remove(cartListPrice[index]);
     cartList.remove(item);
     notifyListeners();
   }

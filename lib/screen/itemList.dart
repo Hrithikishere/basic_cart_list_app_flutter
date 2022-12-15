@@ -72,8 +72,11 @@ class _ItemListState extends State<ItemList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const CartList()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CartList(),
+              ));
         },
         backgroundColor: baseColor,
         child: Icon(Icons.shopping_cart_checkout_outlined),
@@ -233,7 +236,7 @@ class CartButton extends StatelessWidget {
           operations.addItemQuantity(1);
         }
       },
-      child: Text('Add to Cart'),
+      child: const Text('Add to Cart'),
       style: ElevatedButton.styleFrom(
           backgroundColor: baseColor, // background (button) color
           foregroundColor: Colors.white // foreground (text) color
