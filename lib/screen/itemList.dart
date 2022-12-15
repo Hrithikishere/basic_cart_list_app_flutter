@@ -174,7 +174,7 @@ class Products extends StatelessWidget {
               Positioned(
                 bottom: 32,
                 child: Text(
-                  '$plantPrice',
+                  '\$ $plantPrice',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,

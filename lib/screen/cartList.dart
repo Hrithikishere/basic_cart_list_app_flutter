@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:math';
 import 'package:basic_cart_provider_navigator_flutter/screen/itemList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +51,7 @@ class _CartListState extends State<CartList> {
                         subtitle: Padding(
                           padding: EdgeInsets.only(top: 5),
                           child: Text(
-                            "\$ ${cartListPrice[index] * cartListQuantity[index]}",
+                            "\$ ${double.parse((cartListPrice[index] * cartListQuantity[index]).toStringAsFixed(2))}",
                             style: TextStyle(fontSize: 20),
                           ),
                         ),

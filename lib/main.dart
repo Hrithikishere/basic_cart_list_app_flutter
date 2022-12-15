@@ -6,6 +6,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:basic_cart_provider_navigator_flutter/screen/cartList.dart';
 import 'package:basic_cart_provider_navigator_flutter/screen/itemList.dart';
 import 'package:basic_cart_provider_navigator_flutter/screen/splashScreen.dart';
+import 'dart:math';
 
 List<String> itemList = [
   "Ball Cactus",
@@ -159,9 +160,9 @@ class Operations with ChangeNotifier {
     cartListImage.remove(item);
     int index = cartList.indexOf(item);
     cartListQuantity.remove(cartListQuantity[index]);
-    notifyListeners();
     cartListPrice.remove(item);
     cartList.remove(item);
+    notifyListeners();
   }
 }
 

@@ -66,7 +66,7 @@ class ProductFeature extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  "$plantPrice",
+                  "\$ $plantPrice",
                   style: GoogleFonts.cabin(
                     textStyle: TextStyle(
                         fontSize: 20,
