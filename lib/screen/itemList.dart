@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:basic_cart_provider_navigator_flutter/screen/cartList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -149,9 +150,14 @@ class Products extends StatelessWidget {
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
-              Image.network(
-                plantImg!,
-                fit: BoxFit.cover,
+              Center(
+                child: CachedNetworkImage(
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  imageUrl: plantImg!,
+                  fit: BoxFit.cover,
+                  maxHeightDiskCache: 300,
+                ),
               ),
               Positioned(
                 bottom: 30,

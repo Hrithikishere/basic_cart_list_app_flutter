@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,12 +47,17 @@ class ProductFeature extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.all(13),
-                child: Image.network(
-                  "$plantImg",
-                  fit: BoxFit.contain,
-                  alignment: Alignment.center,
+              Center(
+                child: Padding(
+                  padding: EdgeInsets.all(13),
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    imageUrl: plantImg!,
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                    maxHeightDiskCache: 650,
+                  ),
                 ),
               ),
 

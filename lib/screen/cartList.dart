@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:basic_cart_provider_navigator_flutter/screen/itemList.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,7 +47,16 @@ class _CartListState extends State<CartList> {
                     itemCount: cartList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        leading: Image.network(cartListImage[index]),
+                        leading: CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                          imageUrl: cartListImage[index],
+                          fit: BoxFit.cover,
+                          alignment: Alignment.center,
+                          maxHeightDiskCache: 150,
+                        ),
                         title: Text(
                           cartList[index],
                           style: GoogleFonts.cabin(
